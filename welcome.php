@@ -11,53 +11,62 @@ $dbname = "dephqj61jf8kuj";
 $firstname=$_POST["firstname"];
 $lastname=$_POST["lastname"];
 $email=$_POST["email"];
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  // set the PDO error mode to exception
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Create connection
-require 'vendor/autoload.php';
+  // prepare sql and bind parameters
+  $stmt = $conn->prepare("INSERT INTO myDB.MyGuests (firstname, lastname, email)
+  VALUES (:firstname, :lastname, :email)");
+  $stmt->bindParam(':firstname', $firstname);
+  $stmt->bindParam(':lastname', $lastname);
+  $stmt->bindParam(':email', $email);
+  $stmt->execute();
 
-use phpbaru\Connection as Connection;
+  echo "New records created successfully";
+} catch(PDOException $e) {
+  echo "Error: " . $e->getMessage();
+}
+echo "<table style='border: solid 1px black;'>";
+echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
+
+class TableRows extends RecursiveIteratorIterator {
+  function __construct($it) {
+    parent::__construct($it, self::LEAVES_ONLY);
+  }
+
+  function current() {
+    return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
+  }
+
+  function beginChildren() {
+    echo "<tr>";
+  }
+
+  function endChildren() {
+    echo "</tr>" . "\n";
+  }
+}
 
 try {
-    Connection::get()->connect();
-    echo 'A connection to the PostgreSQL database sever has been established successfully.';
-} catch (\PDOException $e) {
-    echo $e->getMessage();
-}
-  
-// Create connection
-require 'vendor/autoload.php';
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $stmt = $conn->prepare("SELECT id, firstname, lastname FROM myDB.MyGuests");
+  $stmt->execute();
 
-use phpbaru\Connection as Connection;
-$sql = "INSERT INTO myDB.MyGuests (firstname, lastname, email)
-VALUES ('$firstname','$lastname', '$email');";
-
-$stmt = $this->pdo->prepare($sql);
-        
-        // pass values to the statement
-        $stmt->bindValue(':firstname', $firstname);
-        $stmt->bindValue(':lastname', $lastname);
-        $stmt->bindValue(':email', $email);
-        // execute the insert statement
-        $stmt->execute();
-        
-// Create connection
-require 'vendor/autoload.php';
-
-use phpbaru\Connection as Connection;
-$sql = "SELECT id, firstname, lastname FROM myDB.MyGuests";
-$result = $this->pdo->prepare($sql);
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "id: " . $row["id"]. " - Name: " . $row["firstname"]. " " . $row["lastname"]. "<br>";
-    }
-} else {
-    echo "0 results";
+  // set the resulting array to associative
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+    echo $v;
+  }
+} catch(PDOException $e) {
+  echo "Error: " . $e->getMessage();
 }
 
+$conn = null;
 ?>
 <a href="http://localhost/tesss.php"> hapus </a>
 <a href="http://localhost/tambahdata.php">tambah</a>
-</html>
 </body>
 </html>
