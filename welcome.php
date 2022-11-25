@@ -13,40 +13,37 @@ $lastname=$_POST["lastname"];
 $email=$_POST["email"];
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require 'vendor/autoload.php';
 
-// sql to create table
-$sql = "CREATE TABLE public.MyGuests (
-id VARCHAR(6) ,
-firstname VARCHAR(30) NOT NULL,
-lastname VARCHAR(30) NOT NULL,
-email VARCHAR(50)
-)";
+use phpbaru\Connection as Connection;
 
-if ($conn->query($sql) === TRUE) {
-  echo "Table MyGuests created successfully";
-} else {
-  echo "Error creating table: " . $conn->error;
+try {
+    Connection::get()->connect();
+    echo 'A connection to the PostgreSQL database sever has been established successfully.';
+} catch (\PDOException $e) {
+    echo $e->getMessage();
 }
+  
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+require 'vendor/autoload.php';
+
+use phpbaru\Connection as Connection;
 $sql = "INSERT INTO myDB.MyGuests (firstname, lastname, email)
 VALUES ('$firstname','$lastname', '$email');";
 
-if ($conn->query($sql) === TRUE) {
-    echo "New records created successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-$conn = new mysqli($servername, $username, $password, $dbname);
+$stmt = $this->pdo->prepare($sql);
+        
+        // pass values to the statement
+        $stmt->bindValue(':firstname', $firstname);
+        $stmt->bindValue(':lastname', $lastname);
+        $stmt->bindValue(':email', $email);
+        // execute the insert statement
+        $stmt->execute();
+        
+// Create connection
+require 'vendor/autoload.php';
+
+use phpbaru\Connection as Connection;
 $sql = "SELECT id, firstname, lastname FROM myDB.MyGuests";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -58,7 +55,6 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
-$conn->close();
 ?>
 <a href="http://localhost/tesss.php"> hapus </a>
 <a href="http://localhost/tambahdata.php">tambah</a>
