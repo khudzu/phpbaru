@@ -5,6 +5,7 @@ Welcome <?php echo $_POST["firstname"]; ?><br>
 Your email address is: <?php echo $_POST["email"]; 
 
 $servername = "ec2-52-70-45-163.compute-1.amazonaws.com";
+$port="5432";
 $username = "dodoaucrkueiyb";
 $password = "d0cabcd343805d6858deac56b55b7aa7fe3aa0d1111d9ba64c6b1e8169e26db6";
 $dbname = "dephqj61jf8kuj";
@@ -12,7 +13,7 @@ $firstname=$_POST["firstname"];
 $lastname=$_POST["lastname"];
 $email=$_POST["email"];
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  $conn = new PDO("mysql:host=$servername;port=$port;dbname=$dbname", $username, $password);
   // set the PDO error mode to exception
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -50,7 +51,7 @@ class TableRows extends RecursiveIteratorIterator {
 }
 
 try {
-  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  $conn = new PDO("mysql:host=$servername;port=$port;dbname=$dbname", $username, $password);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare("SELECT id, firstname, lastname FROM myDB.MyGuests");
   $stmt->execute();
