@@ -4,19 +4,13 @@
 Welcome <?php echo $_POST["firstname"]; ?><br>
 Your email address is: <?php echo $_POST["email"]; 
 
-$servername = "localhost:5432";
+$servername = "ec2-52-70-45-163.compute-1.amazonaws.com";
 $username = "dodoaucrkueiyb";
 $password = "d0cabcd343805d6858deac56b55b7aa7fe3aa0d1111d9ba64c6b1e8169e26db6";
 $dbname = "dephqj61jf8kuj";
 $firstname=$_POST["firstname"];
 $lastname=$_POST["lastname"];
 $email=$_POST["email"];
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
