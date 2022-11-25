@@ -13,9 +13,9 @@ $firstname=$_POST["firstname"];
 $lastname=$_POST["lastname"];
 $email=$_POST["email"];
 try {
-  $conn = new PDO("psql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
+  $conn = new \PDO("psql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
   // set the PDO error mode to exception
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 
   // prepare sql and bind parameters
   $stmt = $conn->prepare("INSERT INTO myDB.MyGuests (firstname, lastname, email)
@@ -51,8 +51,8 @@ class TableRows extends RecursiveIteratorIterator {
 }
 
 try {
-  $conn = new PDO("psql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
-  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $conn = new \PDO("psql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
+  $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare("SELECT id, firstname, lastname FROM myDB.MyGuests");
   $stmt->execute();
 
