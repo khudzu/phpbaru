@@ -1,6 +1,9 @@
-<?php echo $_POST["firstname"]; ?><br>
-Your email address is: <?php echo $_POST["email"]; ?>
-<?php
+<html>
+<body>
+
+Welcome <?php echo $_POST["firstname"]; ?><br>
+Your email address is: <?php echo $_POST["email"]; 
+
 $servername = "ec2-52-70-45-163.compute-1.amazonaws.com";
 $port="5432";
 $username = "dodoaucrkueiyb";
@@ -10,9 +13,9 @@ $firstname=$_POST["firstname"];
 $lastname=$_POST["lastname"];
 $email=$_POST["email"];
 try {
-  $conn = new \PDO("psql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
+  $conn = new PDO("psql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
   // set the PDO error mode to exception
-  $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // prepare sql and bind parameters
   $stmt = $conn->prepare("INSERT INTO myDB.MyGuests (firstname, lastname, email)
@@ -23,7 +26,7 @@ try {
   $stmt->execute();
 
   echo "New records created successfully";
-} catch(\PDOException $e) {
+} catch(PDOException $e) {
   echo "Error: " . $e->getMessage();
 }
 echo "<table style='border: solid 1px black;'>";
@@ -48,8 +51,8 @@ class TableRows extends RecursiveIteratorIterator {
 }
 
 try {
-  $conn = new \PDO("psql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
-  $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+  $conn = new PDO("psql:host=$servername;port=$port;dbname=$dbname;user=$username;password=$password");
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   $stmt = $conn->prepare("SELECT id, firstname, lastname FROM myDB.MyGuests");
   $stmt->execute();
 
@@ -58,9 +61,11 @@ try {
   foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
     echo $v;
   }
-} catch(\PDOException $e) {
+} catch(PDOException $e) {
   echo "Error: " . $e->getMessage();
 }
 
 $conn = null;
 ?>
+</body>
+</html>
