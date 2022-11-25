@@ -45,7 +45,7 @@ require 'vendor/autoload.php';
 
 use phpbaru\Connection as Connection;
 $sql = "SELECT id, firstname, lastname FROM myDB.MyGuests";
-$result = $conn->query($sql);
+$result = $this->pdo->prepare($sql);
 if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
