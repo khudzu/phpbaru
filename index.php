@@ -46,7 +46,7 @@
       <div class="contact-form">
         <h3 class="section-title">Hubungi Kami</h3>
         <p>Email (Wajib diisi)</p>
-        <form action="https://cobaphpp.herokuapp.com/welcome.php" method="post">
+        <form action="welcome.php" method="post">
           First Name: <input type="text" name="firstname"><br>
           Last Name: <input type="text" name="lastname"><br>
           E-mail: <input type="text" name="email"><br>
