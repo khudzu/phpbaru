@@ -1,9 +1,6 @@
-<html>
-<body>
-
-Welcome <?php echo $_POST["firstname"]; ?><br>
-Your email address is: <?php echo $_POST["email"]; 
-
+<?php echo $_POST["firstname"]; ?><br>
+Your email address is: <?php echo $_POST["email"]; ?>
+<?php
 $servername = "ec2-52-70-45-163.compute-1.amazonaws.com";
 $port="5432";
 $username = "dodoaucrkueiyb";
@@ -67,7 +64,5 @@ try {
 
 $conn = null;
 ?>
-<a href="http://localhost/tesss.php"> hapus </a>
-<a href="http://localhost/tambahdata.php">tambah</a>
 </body>
 </html>
