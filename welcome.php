@@ -4,8 +4,8 @@
 Welcome <?php echo $_POST["firstname"]; ?><br>
 Your email address is: <?php echo $_POST["email"]; 
 
-$servername = "localhost";
-$username = "root";
+$servername = "localhost:5432";
+$username = "dodoaucrkueiyb";
 $password = "";
 $dbname = "postgresql-rigid-76532";
 $firstname=$_POST["firstname"];
