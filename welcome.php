@@ -7,7 +7,7 @@ Your email address is: <?php echo $_POST["email"];
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "myDB";
+$dbname = "postgresql-rigid-76532";
 $firstname=$_POST["firstname"];
 $lastname=$_POST["lastname"];
 $email=$_POST["email"];
@@ -18,13 +18,6 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-// Create database
-$sql = "CREATE SCHEMA myDB";
-if ($conn->query($sql) === TRUE) {
-  echo "Database created successfully";
-} else {
-  echo "Error creating database: " . $conn->error;
-}
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -33,12 +26,11 @@ if ($conn->connect_error) {
 }
 
 // sql to create table
-$sql = "CREATE TABLE myDB.MyGuests (
-id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+$sql = "CREATE TABLE public.MyGuests (
+id VARCHAR(6) ,
 firstname VARCHAR(30) NOT NULL,
 lastname VARCHAR(30) NOT NULL,
-email VARCHAR(50),
-reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+email VARCHAR(50)
 )";
 
 if ($conn->query($sql) === TRUE) {
