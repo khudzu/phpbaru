@@ -61,7 +61,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 $conn = new mysqli($servername, $username, $password, $dbname);
-$sql = "SELECT id, firstname, lastname FROM MyGuests";
+$sql = "SELECT id, firstname, lastname FROM myDB.MyGuests";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
