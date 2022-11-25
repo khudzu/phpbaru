@@ -64,5 +64,3 @@ try {
 
 $conn = null;
 ?>
-</body>
-</html>
