@@ -6,7 +6,7 @@ Your email address is: <?php echo $_POST["email"];
 
 $servername = "localhost:5432";
 $username = "dodoaucrkueiyb";
-$password = "";
+$password = "d0cabcd343805d6858deac56b55b7aa7fe3aa0d1111d9ba64c6b1e8169e26db6";
 $dbname = "postgresql-rigid-76532";
 $firstname=$_POST["firstname"];
 $lastname=$_POST["lastname"];
