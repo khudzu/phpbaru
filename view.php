@@ -9,9 +9,6 @@ $port="5432";
 $username = "dodoaucrkueiyb";
 $password = "d0cabcd343805d6858deac56b55b7aa7fe3aa0d1111d9ba64c6b1e8169e26db6";
 $dbname = "dephqj61jf8kuj";
-$firstname=$_POST["firstname"];
-$lastname=$_POST["lastname"];
-$email=$_POST["email"];
 
 echo "<table style='border: solid 1px black;'>";
 echo "<tr><th>Id</th><th>Firstname</th><th>Lastname</th></tr>";
