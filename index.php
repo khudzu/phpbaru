@@ -13,7 +13,7 @@
         <ul>
           <li>Tentang</li>
           <li>Pelajaran</li>
-          <li>Hubungi Kami</li>
+          <li><a href="view.php">Hubungi Kami</a></li>
         </ul>
       </div>
     </div>
